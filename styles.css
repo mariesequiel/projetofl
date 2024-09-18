@@ -1,0 +1,156 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /* Remove as margens e preenchimentos padrão e define box-sizing como border-box */
+}
+
+body {
+    font-family: 'Arial', sans-serif; /* Define a fonte padrão */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Centraliza o conteúdo na tela */
+    background-image: url('https://www.nintendo.com/eu/media/images/10_share_images/games_15/nintendo_switch_download_software_1/2x1_NSwitchDS_TheMinesweeperCrewBomberExpedition_image1600w.jpg'); /* Define uma imagem de fundo */
+    background-size: cover; /* A imagem cobre toda a tela */
+    background-repeat: no-repeat;
+}
+
+.container {
+    text-align: center;
+    background-color: rgba(185, 176, 176, 0.747); 
+    padding: 50px; /* Espaçamento interno */
+    border-radius: 10px; /* Bordas arredondadas */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.945);
+}
+
+h1 {
+    font-size: 4rem; /* Tamanho da fonte do título */
+    margin-bottom: 20px; /* Espaçamento abaixo do título */
+    color: #470606; /* Cor do texto */
+}
+
+ul {
+    text-align: left;
+    color: rgb(102, 5, 5); /* Cor do texto */
+    margin-bottom: 20px; /* Espaçamento abaixo da lista */
+}
+
+.button {
+    position: relative;
+    display: inline-block; /* Define o botão como inline-block */
+    margin: 20px; /* Margem ao redor do botão */
+}
+/*propriedades do botao*/
+.button a {
+    color: rgb(243, 244, 248); /* Cor do texto */
+    font-family: Helvetica, sans-serif; /* Define a fonte do link */
+    font-weight: bold;
+    font-size: 36px; /* Tamanho da fonte */
+    text-align: center; /* Alinhamento do texto */
+    text-decoration: none; /* Remove o sublinhado */
+    background-color: #4c607a; /* Cor de fundo do link */
+    display: block; /* Faz o link ocupar todo o botão */
+    padding: 20px 40px; /* Espaçamento interno */
+    text-shadow: 0px 1px 0px #000000; /* Sombra do texto */
+    box-shadow: inset 0 1px 0 #a7a7b6, 0 10px 0 #404258; /* Efeitos de sombra */
+    border-radius: 5px; /* Bordas arredondadas */
+}
+
+.button a:active {
+    top: 10px; /* Move o botão para baixo ao clicar */
+    background-color: #0c1533; /* Altera a cor de fundo ao clicar */
+    box-shadow: inset 0 1px 0 #0c0149, inset 0 -3px 0 #160d00; /* Efeito de sombra ao clicar */
+}
+
+.button:after {
+    content: ""; /* Elemento decorativo para sombra do botão */
+    height: 100%;
+    width: 100%;
+    padding: 4px;
+    position: absolute;
+    bottom: -15px;
+    left: -4px;
+    z-index: -1;
+    background-color: #2B1800; /* Cor de fundo da sombra */
+    border-radius: 5px; /* Bordas arredondadas */
+}
+
+#game-container {
+    text-align: center;
+    display: none; /* Esconde o container do jogo inicialmente */
+}
+
+#status {
+    margin-bottom: 20px; /* Espaçamento abaixo do status */
+}
+
+#timer-container, #bombs-container {
+    background-color: rgba(0, 0, 0, 0.7); /* Fundo semitransparente */
+    color: white; /* Cor do texto */
+    padding: 10px; /* Espaçamento interno */
+    border-radius: 5px; /* Bordas arredondadas */
+    margin: 10px; /* Margem ao redor dos containers */
+}
+
+#board {
+    display: grid;
+    gap: 10px; /* Espaçamento entre as células do grid */
+    background-color: #333; /* Cor de fundo do tabuleiro */
+    padding: 10px; /* Espaçamento interno */
+    border-radius: 10px; /* Bordas arredondadas */
+    background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #002bff, #7a00ff, #ff00c8, #ff0000); /* Efeito de gradiente no fundo */
+}
+
+.cell {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem; /* Tamanho da fonte dentro das células */
+    font-weight: bold; /* Texto em negrito */
+    cursor: pointer; /* Cursor em forma de mão ao passar o mouse */
+    transition: background-color 0.3s ease, transform 0.2s; /* Efeito de transição */
+    background-color: #ccc; /* Cor de fundo das células */
+    border: 2px solid #555; /* Borda das células */
+    width: 40px; /* Largura das células */
+    height: 40px; /* Altura das células */
+    border-radius: 5px; /* Bordas arredondadas */
+}
+
+.cell:active {
+    transform: scale(0.95); /* Efeito de escala ao clicar */
+}
+
+.cell[data-revealed="true"] {
+    cursor: default; /* Remove o cursor de mão */
+    background-color: #ddd; /* Cor de fundo para células reveladas */
+    border-color: #888; /* Cor da borda para células reveladas */
+}
+
+.alert-box {
+    position: fixed; /* Posição fixa para ficar centralizada na tela */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Centraliza a caixa de alerta */
+    background-color: rgba(233, 207, 207, 0.8); /* Fundo semitransparente */
+    color: white; /* Cor do texto */
+    padding: 20px; /* Espaçamento interno */
+    border-radius: 10px; /* Bordas arredondadas */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.8); /* Sombra ao redor da caixa */
+    text-align: center; /* Texto centralizado */
+    z-index: 1000; /* Garante que a caixa fique acima de outros elementos */
+}
+
+.alert-box button {
+    background-color: #4c607a; /* Cor de fundo dos botões */
+    color: white; /* Cor do texto */
+    border: none; /* Remove a borda do botão */
+    padding: 10px 20px; /* Espaçamento interno */
+    margin: 10px; /* Margem ao redor dos botões */
+    border-radius: 5px; /* Bordas arredondadas */
+    cursor: pointer; /* Cursor em forma de mão ao passar o mouse */
+    font-size: 16px; /* Tamanho da fonte do botão */
+}
+
+.alert-box button:hover {
+    background-color: #0c1533; /* Altera a cor de fundo ao passar o mouse */
+}
